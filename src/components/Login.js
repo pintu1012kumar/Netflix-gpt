@@ -5,7 +5,7 @@ import { checkValidData } from '../utils/validate';
 
 const Login = () => {
 const [isSignInForm,setIsSignInForm] = useState(true);
-const [errorMessage, setErrorMessage] = useState(null); 
+const [errorMessage,setErrorMessage] = useState(null); 
 
 const email = useRef(null);
 const password = useRef(null);
@@ -15,8 +15,10 @@ const handleButtonClick = () => {
   // validate the form data
   console.log(email.current.value);
   console.log(password.current.value);
+
   const massage =  checkValidData(email.current.value,password.current.value);
- console.log(massage);
+//  console.log(massage);
+setErrorMessage(massage);
 
 }
 
@@ -54,7 +56,7 @@ const toggleSignInForm = () => {
             <label className="block text-sm font-bold mb-2" htmlFor="password">Password:</label>
             <input ref={password} type="password" id="password" placeholder="Password" className="p-2 my-2 w-full bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"/>
         </div>
-        <p>{errorMessage}</p>
+        <p className="text-red-600 font-bold text-lg py-2">{errorMessage}</p>
         <button type="submit" className="p-4 my-4 bg-red-700 w-full rounded-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600" onClick={handleButtonClick}>
           {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
