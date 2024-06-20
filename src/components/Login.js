@@ -1,8 +1,24 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from './Header'
+import { checkValidData } from '../utils/validate';
+
 
 const Login = () => {
 const [isSignInForm,setIsSignInForm] = useState(true);
+const [errorMessage, setErrorMessage] = useState(null); 
+
+const email = useRef(null);
+const password = useRef(null);
+
+
+const handleButtonClick = () => {
+  // validate the form data
+  console.log(email.current.value);
+  console.log(password.current.value);
+  const massage =  checkValidData(email.current.value,password.current.value);
+ console.log(massage);
+
+}
 
 const toggleSignInForm = () => {
   setIsSignInForm(!isSignInForm);
@@ -16,27 +32,30 @@ const toggleSignInForm = () => {
       />
       </div>
      
-       <form class="w-full max-w-sm absolute py-12 my-36 mx-auto  right-0 left-0  bg-black rounded-lg shadow-lg text-white px-8 bg-opacity-80">
-        <h1 class="font-bold text-3xl py-4 text-center">
+       <form  onSubmit={(e)=>e.preventDefault()}
+        className="w-full max-w-sm absolute py-12 my-36 mx-auto  right-0 left-0  bg-black rounded-lg shadow-lg text-white px-8 bg-opacity-80"
+        >
+        <h1 className="font-bold text-3xl py-4 text-center">
           {isSignInForm ? "Sign In" : "Sign Up"}
           </h1>
 
         {!isSignInForm && (
-            <div class="mb-4">
-               <label class="block text-sm font-bold mb-2" for="email">Full name:</label>
-               <input type="text" id="text" placeholder="Enter your name" class="p-2 my-2 w-full bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"/>
+            <div className="mb-4">
+               <label className="block text-sm font-bold mb-2" htmlFor="email">Full name:</label>
+               <input type="text" id="text" placeholder="Enter your name" className="p-2 my-2 w-full bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"/>
            </div>
         )}
-        <div class="mb-4">
-            <label class="block text-sm font-bold mb-2" for="email">Email Address:</label>
-            <input type="email" id="email" placeholder="Email Address" class="p-2 my-2 w-full bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"/>
+        <div className="mb-4">
+            <label className="block text-sm font-bold mb-2" htmlFor="email">Email Address:</label>
+            <input ref={email} type="email" id="email" placeholder="Email Address" className="p-2 my-2 w-full bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"/>
         </div>
         
-        <div class="mb-6">
-            <label class="block text-sm font-bold mb-2" for="password">Password:</label>
-            <input type="password" id="password" placeholder="Password" class="p-2 my-2 w-full bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"/>
+        <div className="mb-6">
+            <label className="block text-sm font-bold mb-2" htmlFor="password">Password:</label>
+            <input ref={password} type="password" id="password" placeholder="Password" className="p-2 my-2 w-full bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"/>
         </div>
-        <button type="submit" class="p-4 my-4 bg-red-700 w-full rounded-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600">
+        <p>{errorMessage}</p>
+        <button type="submit" className="p-4 my-4 bg-red-700 w-full rounded-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600" onClick={handleButtonClick}>
           {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
         <p className='py-4 cursor-pointer' onClick={toggleSignInForm}>
