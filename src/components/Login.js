@@ -13,14 +13,25 @@ const password = useRef(null);
 
 const handleButtonClick = () => {
   // validate the form data
-  console.log(email.current.value);
-  console.log(password.current.value);
+  // console.log(email.current.value);
+  // console.log(password.current.value);
 
   const massage =  checkValidData(email.current.value,password.current.value);
 //  console.log(massage);
 setErrorMessage(massage);
+if(massage) return;
+if(!isSignInForm) {
+    // Sign Up Logic
 
 }
+else{
+   // Sign In Logic
+}
+
+
+
+
+};
 
 const toggleSignInForm = () => {
   setIsSignInForm(!isSignInForm);
