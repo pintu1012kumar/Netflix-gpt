@@ -1,12 +1,18 @@
 import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { checkValidData } from '../utils/validate';
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from '../utils/firebase';
+import {signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
 const [isSignInForm,setIsSignInForm] = useState(true);
-const [errorMessage,setErrorMessage] = useState(null); 
+const [errorMessage,setErrorMessage] = useState(null);
+const navigate = useNavigate(); 
 
+const name = useRef(null);
 const email = useRef(null);
 const password = useRef(null);
 
@@ -20,12 +26,45 @@ const handleButtonClick = () => {
 //  console.log(massage);
 setErrorMessage(massage);
 if(massage) return;
+
 if(!isSignInForm) {
     // Sign Up Logic
 
+   createUserWithEmailAndPassword(auth,email.current.value,password.current.value)
+   .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    updateProfile(user, {
+      displayName: name.current.value, 
+      photoURL: "https://avatars.githubusercontent.com/u/113334255?v=4"
+    }).then(() => {
+      navigate("/browse")
+    }).catch((error) => {
+     setErrorMessage(error.massage);
+    });
+   
+   })
+   .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+   });
 }
 else{
    // Sign In Logic
+
+   signInWithEmailAndPassword(auth, email.current.value,password.current.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    navigate("/browse")
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+  });
 }
 
 
