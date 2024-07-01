@@ -3,7 +3,7 @@ import React from 'react'
 const VideoBackground = () => {
   return (
     <div>
-      y
+      VideoBackground
     </div>
   )
 }
