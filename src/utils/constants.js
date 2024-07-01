@@ -11,3 +11,10 @@ export const API_OPTIONS = {
   }
 };
 
+// export const API_OPTIONS = {
+//   method: 'GET',
+//   headers: {
+//     accept: 'application/json',
+//     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTAzYTA1NmQ1OTEzM2RhMjQwMzViN2Q3NWI3N2FhNCIsIm5iZiI6MTcxOTgxMDk3OS42MDA5ODQsInN1YiI6IjY2N2U5MGFjNWNiMDUxOGU3ZmRhOWMxNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0gKW9yadqTJG2h1IjKi2oZcsoYb5KcRVZscWn7l_3R8'
+//   }
+// };
