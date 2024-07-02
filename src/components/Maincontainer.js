@@ -14,6 +14,7 @@ const Maincontainer = () => {
  console.log(mainMovie); 
 
  const {original_title,overview, id} = mainMovie;
+ 
 
   return (
     <div>
@@ -22,6 +23,7 @@ const Maincontainer = () => {
       <VideoBackground movieId={id} />
     </div>
   )
+
 }
 
 export default Maincontainer;
